@@ -16,10 +16,8 @@ class ConvertThread(Thread):
         self.secret_key = self.main.config['secret_key']
         self.region = self.main.config['region']
         self.pdf_path = self.main.fileLineEdit.text()
-        self.start_idx = self.main.startSpinBox.value() - 1
+        self.start_idx = self.main.startSpinBox.value()
         self.end_idx = self.main.endSpinBox.value()
-        if self.end_idx == 0:
-            self.end_idx = -1
         self.rotate = int(self.main.rotateComboBox.currentText())
         self._stop_event = Event()
         self._pause_event = Event()
@@ -27,17 +25,14 @@ class ConvertThread(Thread):
     def convert(self):
         self.main.statusbar.showMessage(f"正在将 PDF 文件转换为图片 ...")
         save_path = "temp"
-        images = pdf2images(self.pdf_path, self.rotate, save_path)
-        if self.end_idx == -1:
-            self.end_idx = len(images) + 1
-        images = images[self.start_idx:self.end_idx]
+        images = pdf2images(self.pdf_path, self.rotate, save_path, self.start_idx, self.end_idx)
         if self.should_stop():
             return False, ""
         self.main.statusbar.showMessage(f"转换完毕，正在解析图片 ...")
         for i, image in enumerate(images):
             if self.should_stop():
                 return False, ""
-            self.main.statusbar.showMessage(f"正在解析第 {i + 1} 张图片（共 {self.end_idx - self.start_idx + 1} 张） ...")
+            self.main.statusbar.showMessage(f"正在解析第 {i + 1} 张图片（共 {len(images)} 张） ...")
             ok, message = image2excel(image, os.path.join(save_path, f"{os.path.basename(image).split('.')[0]}.xlsx"),
                                       self.access_key, self.secret_key, self.region)
             if not ok:
@@ -46,7 +41,7 @@ class ConvertThread(Thread):
             return False, ""
         self.main.statusbar.showMessage(f"解析完毕，正在合并 Excel 文件 ...")
         combine_excels(save_path,
-                       f"{os.path.basename(self.pdf_path).split('.')[0]}（{self.start_idx + 1}-{self.end_idx}）.xlsx")
+                       f"{os.path.basename(self.pdf_path).split('.')[0]}（{self.start_idx}-{self.end_idx}）.xlsx")
         return True, ""
 
     def run(self):

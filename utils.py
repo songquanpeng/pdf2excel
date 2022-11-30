@@ -3,25 +3,51 @@ import glob
 import os
 import shutil
 
+import fitz
+from PIL import Image
 from huaweicloudsdkcore.auth.credentials import BasicCredentials
 from huaweicloudsdkcore.exceptions import exceptions
 from huaweicloudsdkocr.v1 import *
 from huaweicloudsdkocr.v1.region.ocr_region import OcrRegion
 from openpyxl import Workbook, load_workbook
-from pdf2image import convert_from_path
 
 
-def pdf2images(pdf_path, rotate, save_path):
+# def pdf2images(pdf_path, rotate, save_path):
+#     if os.path.exists(save_path):
+#         shutil.rmtree(save_path)
+#     os.makedirs(save_path, exist_ok=True)
+#     images = convert_from_path(pdf_path)
+#     paths = []
+#     for i, img in enumerate(images):
+#         img = img.rotate(rotate, expand=True)
+#         path = os.path.join(save_path, f'page-{i + 1:02}.jpg')
+#         img.save(path, 'JPEG')
+#         paths.append(path)
+#     return paths
+
+
+def pdf2images(pdf_path, rotate, save_path, start_idx, end_idx):
     if os.path.exists(save_path):
         shutil.rmtree(save_path)
     os.makedirs(save_path, exist_ok=True)
-    images = convert_from_path(pdf_path)
+
+    zoom = 4  # to increase the resolution
+    mat = fitz.Matrix(zoom, zoom)
+    doc = fitz.open(pdf_path)
+    start_idx -= 1
+    if end_idx == 0:
+        end_idx = len(doc) - 1
+    else:
+        end_idx -= 1
     paths = []
-    for i, img in enumerate(images):
-        img = img.rotate(rotate, expand=True)
-        path = os.path.join(save_path, f'page-{i + 1:02}.jpg')
-        img.save(path, 'JPEG')
-        paths.append(path)
+    for i, page in enumerate(doc):
+        if start_idx <= i <= end_idx:
+            pix = page.get_pixmap(matrix=mat)
+            img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+            img = img.rotate(rotate, expand=True)
+            path = os.path.join(save_path, f'page-{i + 1 :02}.jpg')
+            img.save(path, 'JPEG')
+            paths.append(path)
     return paths
 
 
