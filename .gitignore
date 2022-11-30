@@ -8,3 +8,6 @@ build
 *.spec
 .DS_Store
 *.ini
+data
+temp
+*.xlsx

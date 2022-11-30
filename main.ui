@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>555</width>
+    <width>560</width>
     <height>275</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>PDF 文件转 Excel 表格工具</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
+   <string notr="true">font: 10pt &quot;Microsoft YaHei UI&quot;;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -86,10 +86,13 @@
           <item>
            <widget class="QSpinBox" name="endSpinBox">
             <property name="minimum">
-             <number>1</number>
+             <number>0</number>
             </property>
             <property name="maximum">
              <number>9999</number>
+            </property>
+            <property name="value">
+             <number>0</number>
             </property>
            </widget>
           </item>
@@ -134,7 +137,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>88</height>
+            <height>108</height>
            </size>
           </property>
          </spacer>
@@ -219,8 +222,8 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>323</width>
-            <height>103</height>
+            <width>403</width>
+            <height>123</height>
            </size>
           </property>
          </spacer>
