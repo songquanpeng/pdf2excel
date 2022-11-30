@@ -16,21 +16,23 @@
 可在 [Release 页面](https://github.com/songquanpeng/pdf2excel/releases)下载最新版本（Windows，macOS，Linux）。
 
 ## 功能
-TODO
+将 PDF 文件转化为可编辑的 Excel 表格。
 
 ## 截图展示
 ![demo](demo.png)
 
 ## 使用方法
-### Windows 用户  
-直接双击 pdf2excel.exe 运行。
+### 配置
+1. 首先需要注册华为云账户，开通[通用表格识别](https://console.huaweicloud.com/ocr/?region=cn-east-3#/ocr/overview)，点击开通服务即可。
+   + 注意，这里可以选择「区域」，例如上述链接默认为 `cn-east-3`。
+2. 获取访问密钥：「控制台」-> 鼠标悬停用户名，点击「我的凭证」->「控制台」->「访问密钥」->「新增访问密钥」，按提示完成操作，下载得到密钥文件，使用编辑器打开即可。
+3. 将 Access Key ID，Secret Access Key 以及你选择的区域（例如 `cn-east-3`）填入应用的配置页面即可。
 
-### macOS 用户
-1. 给执行权限：`chmod u+x pdf2excel-macos`；
-2. 之后直接双击运行 pdf2excel-macos 或在终端中运行都可。
-
-### Linux 用户
-同上，区别在于文件名换成 `pdf2excel`。
+### 转换
+1. 首先点击`选择文件`选择待处理的 PDF 文件。
+2. 填写`起始页`和`结束页`，`结束页`填 `0` 表示处理后续所有页面。
+3. 填写`选择角度`，PDF 文件中表格顺时针旋转多少度就这里就多少度。
+4. 之后点击`开始转换`，生成好的文件将在软件根目录下，文件名由你选择的文件的文件名以及页面范围组成。
 
 ## 打包流程
 ```bash
