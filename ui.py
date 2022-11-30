@@ -133,3 +133,4 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Secret Access Key："))
         self.label_3.setText(_translate("MainWindow", "Region："))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "配置"))
+import resource_rc

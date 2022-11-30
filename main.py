@@ -20,9 +20,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.debug = os.getenv('PA_DEBUG') == "true"
         self.setupUi(self)
         self.setWindowIcon(QIcon(":/icon.png"))
-        self.tray = QSystemTrayIcon()
-        self.tray.setIcon(QIcon(":/icon.png"))
-        self.tray.setVisible(True)
 
         self.startBtn.setDisabled(True)
         self.config = Config(config_file)
