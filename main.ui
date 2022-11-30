@@ -79,7 +79,7 @@
           <item>
            <widget class="QLabel" name="label_5">
             <property name="text">
-             <string>终止页：</string>
+             <string>结束页：</string>
             </property>
            </widget>
           </item>

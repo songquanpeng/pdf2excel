@@ -121,7 +121,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "PDF 文件转 Excel 表格工具"))
         self.chooseBtn.setText(_translate("MainWindow", "选择文件"))
         self.label_4.setText(_translate("MainWindow", "起始页："))
-        self.label_5.setText(_translate("MainWindow", "终止页："))
+        self.label_5.setText(_translate("MainWindow", "结束页："))
         self.label_6.setText(_translate("MainWindow", "旋转："))
         self.rotateComboBox.setItemText(0, _translate("MainWindow", "0"))
         self.rotateComboBox.setItemText(1, _translate("MainWindow", "90"))
